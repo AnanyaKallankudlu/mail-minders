@@ -1,0 +1,107 @@
+{
+  "FromName": "Ananya Kallankudlu",
+  "MessageStream": "inbound",
+  "From": "ananyavbhat@gmail.com",
+  "FromFull": {
+    "Email": "ananyavbhat@gmail.com",
+    "Name": "Ananya Kallankudlu",
+    "MailboxHash": ""
+  },
+  "To": "cac0731fa0b48a89b6bb9d12bca81e59+96c13db57b19de99df96f9aa1d4f83b1@inbound.postmarkapp.com",
+  "ToFull": [
+    {
+      "Email": "cac0731fa0b48a89b6bb9d12bca81e59+96c13db57b19de99df96f9aa1d4f83b1@inbound.postmarkapp.com",
+      "Name": "",
+      "MailboxHash": "96c13db57b19de99df96f9aa1d4f83b1"
+    }
+  ],
+  "Cc": "",
+  "CcFull": [],
+  "Bcc": "",
+  "BccFull": [],
+  "OriginalRecipient": "cac0731fa0b48a89b6bb9d12bca81e59+96c13db57b19de99df96f9aa1d4f83b1@inbound.postmarkapp.com",
+  "Subject": "reminders",
+  "MessageID": "19bccaa1-9d0e-45a9-9832-c48091bf96ad",
+  "ReplyTo": "",
+  "MailboxHash": "96c13db57b19de99df96f9aa1d4f83b1",
+  "Date": "Thu, 29 May 2025 18:54:18 +0530",
+  "TextBody": "➕ Pay electricity bill 1d\n➕ Drink water 2h\n➕ Review project plan 6h\n",
+  "HtmlBody": "<div dir=\"ltr\"><pre style=\"background:rgb(248,248,248);padding:12px;border-radius:6px;font-size:15px\">➕ Pay electricity bill 1d\n➕ Drink water 2h\n➕ Review project plan 6h</pre></div>\n",
+  "StrippedTextReply": "",
+  "Tag": "",
+  "Headers": [
+    {
+      "Name": "Return-Path",
+      "Value": "<ananyavbhat@gmail.com>"
+    },
+    {
+      "Name": "Received",
+      "Value": "by p-pm-inboundg03a-aws-euwest1a.inbound.postmarkapp.com (Postfix, from userid 996)\tid 866C540586D; Thu, 29 May 2025 13:24:30 +0000 (UTC)"
+    },
+    {
+      "Name": "X-Spam-Checker-Version",
+      "Value": "SpamAssassin 3.4.0 (2014-02-07) on\tp-pm-inboundg03a-aws-euwest1a"
+    },
+    {
+      "Name": "X-Spam-Status",
+      "Value": "No"
+    },
+    {
+      "Name": "X-Spam-Score",
+      "Value": "-0.1"
+    },
+    {
+      "Name": "X-Spam-Tests",
+      "Value": "DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,\tRCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,RCVD_IN_VALIDITY_RPBL_BLOCKED,\tRCVD_IN_VALIDITY_SAFE_BLOCKED,RCVD_IN_ZEN_BLOCKED_OPENDNS,SPF_HELO_NONE,\tSPF_PASS"
+    },
+    {
+      "Name": "Received-SPF",
+      "Value": "pass (gmail.com ... _spf.google.com: Sender is authorized to use 'ananyavbhat@gmail.com' in 'mfrom' identity (mechanism 'include:_netblocks.google.com' matched)) receiver=p-pm-inboundg03a-aws-euwest1a; identity=mailfrom; envelope-from=\"ananyavbhat@gmail.com\"; helo=mail-ej1-f46.google.com; client-ip=209.85.218.46"
+    },
+    {
+      "Name": "Received",
+      "Value": "from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])\t(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))\t(No client certificate requested)\tby p-pm-inboundg03a-aws-euwest1a.inbound.postmarkapp.com (Postfix) with ESMTPS id 53DF7453B34\tfor <cac0731fa0b48a89b6bb9d12bca81e59+96c13db57b19de99df96f9aa1d4f83b1@inbound.postmarkapp.com>; Thu, 29 May 2025 13:24:30 +0000 (UTC)"
+    },
+    {
+      "Name": "Received",
+      "Value": "by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-ac34257295dso159539866b.2        for <cac0731fa0b48a89b6bb9d12bca81e59+96c13db57b19de99df96f9aa1d4f83b1@inbound.postmarkapp.com>; Thu, 29 May 2025 06:24:30 -0700 (PDT)"
+    },
+    {
+      "Name": "DKIM-Signature",
+      "Value": "v=1; a=rsa-sha256; c=relaxed/relaxed;        d=gmail.com; s=20230601; t=1748525069; x=1749129869; darn=inbound.postmarkapp.com;        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject         :date:message-id:reply-to;        bh=u+AGZ9zq3O0F//Q0Em4V1dEUTaXInm+xy1sCULNuo0s=;        b=eGqKTgocvD+gvfVjhQCNPIQaHCX1VHoHa1BETnYg++ABrdYFm0Nz5W0C5WWU7Fhj2s         qHT2Neq1RXbEuRhatLL84DxqwEACuKv/MjrsQt+z0k8QE5Gw9EOHZoHrXjOw0tpXoX5F         gyzlMFY+2eFLMeJhXWTr+TX8Yw9hokqRcXQC/Udvpm1dx1Pp7EWGwPKUepIrWPqJ2De1         qseG/Wv4we/bGgQrln/IDY7CrOEmJDDOd7eecbUXxqqRlrr75JnCdm0Yi4E947k4J5bv         FB1CJ7FkK3r6Kql7ZgmeqyddeAVpHg42iWrKaJLcR0GIvHk0o569e7eyLk0S8j8nl2PB         /EBg=="
+    },
+    {
+      "Name": "X-Google-DKIM-Signature",
+      "Value": "v=1; a=rsa-sha256; c=relaxed/relaxed;        d=1e100.net; s=20230601; t=1748525069; x=1749129869;        h=to:subject:message-id:date:from:mime-version:x-gm-message-state         :from:to:cc:subject:date:message-id:reply-to;        bh=u+AGZ9zq3O0F//Q0Em4V1dEUTaXInm+xy1sCULNuo0s=;        b=mwden7KYHH8XDQUnF3/zNsNbKfv3PmyyetrT4DGX1GPGScuUzGFvPTAeEZzEJzyUzq         7mFYVHyA6L1xpnZniAWWOzyAetTw+gv9TiWQK1zIquk+oz/5PylJueYWvwLmSR3ervWS         EMad4FaZr+PuHeaydfoE3ZTmgkjbTr5RuFzaOAFP7Q9NClgPKwb66xwm00gkQM/Td/VK         7kIPfx4U5TwyagW2Cm7oPybdtOzROFzr35ckIcKIjIw67ftTOiya5K6zc7rk/4Y4CBvm         fVUYhc/Nh2s9vEYPlDlvkfHL+wyX/MYCjQ9DIU9oBtIkBIxbTj8aXBrcrmBsMHAdwTlk         WiFQ=="
+    },
+    {
+      "Name": "X-Gm-Message-State",
+      "Value": "AOJu0Yz6HZOlW7AyirT7xWXW/5xHywJqQngRy1c7gHbrWu44ixt2y6hP\tvf4f4d3VrlbMDcACTr9QtI68JZ+fwWVOToYYYxDQXu0uqHipplTiNUYmyNgTIrg7SaBa8fjpldz\twBrRqhQIkwQjFf77yzEEM057idbzW1hRMgvmE4pk="
+    },
+    {
+      "Name": "X-Gm-Gg",
+      "Value": "ASbGncuysOzya1hjziwgN2eAAmJqnBkeCOhX/lmUbelKBTBUXHI3hxGzqKnmgNL0BAc\tMpveHgFr6g8Urp1a+a98l6JYzOua6ZRQFl9iW8OkBs00rc5nLpg64Qu4iF7bBKDs/2qRyE0F4yT\t6zRWbPDDiUv3HFhLtkcCVX8M3VjW6ax9y5MuqfIvQGStcY"
+    },
+    {
+      "Name": "X-Google-Smtp-Source",
+      "Value": "AGHT+IHrSc7WF/fzK/5l0WWvfmFdi/LlmXyER259GGetmD7nBnIGTZd51J+B4yYMtZPy0P2LatrXXRMOFaI6YCSVTyY="
+    },
+    {
+      "Name": "X-Received",
+      "Value": "by 2002:a17:906:f58b:b0:ad5:557b:c369 with SMTP id a640c23a62f3a-ad85b1c2be8mr1946522966b.33.1748525069398; Thu, 29 May 2025 06:24:29 -0700 (PDT)"
+    },
+    {
+      "Name": "MIME-Version",
+      "Value": "1.0"
+    },
+    {
+      "Name": "X-Gm-Features",
+      "Value": "AX0GCFvN_6rGFnI4TY4MfTjRo9AqweYT28wpO-RMEfD7uZwVedlSbAHZtZkdBqk"
+    },
+    {
+      "Name": "Message-ID",
+      "Value": "<CAFS98g+zSLpK0oNfqLuWSguWJzK88dN29gJn6KvkmdKaZuWUOA@mail.gmail.com>"
+    }
+  ],
+  "Attachments": []
+}

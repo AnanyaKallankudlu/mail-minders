@@ -50,9 +50,7 @@ export default async function handleTaskList(
     if (subject === "START") {
       await sendTemplateEmail(fromEmail, 40220172, {}); // START template
       console.log("Welcome email sent");
-    }
-
-    if (subject === "LIST") {
+    } else if (subject === "LIST") {
       const { data: tasks } = await supabase
         .from("tasks")
         .select("task, frequency")
@@ -63,48 +61,91 @@ export default async function handleTaskList(
       });
 
       console.log("Task list sent");
-    }
-
-    // Parse task updates in body
-    const updates = [...body.matchAll(TASK_LINE_REGEX)];
-
-    for (const match of updates) {
-      const symbol = match[1];
-      const task = match[2].trim();
-      const frequency = match[3].trim();
-
-      if (symbol === "➕") {
-        await supabase.from("tasks").upsert(
-          {
-            user_id: userId,
-            task,
-            frequency,
-          },
-          { onConflict: "user_id,task" }
-        );
-      }
-
-      if (symbol === "✅") {
-        const { error: deleteError } = await supabase
-          .from("tasks")
-          .delete()
-          .eq("user_id", userId)
-          .eq("task", task);
-
-        if (deleteError) {
-          console.error(`Error deleting task '${task}':`, deleteError);
+    } else if (subject === "ANALYZE") {
+      const { data: tasks } = await supabase
+        .from("tasks")
+        .select("category, completed_at")
+        .eq("user_id", userId);
+      const chartRes = await fetch(
+        `${process.env.ANALYSIS_SERVER}/generate-charts`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ tasks }),
         }
+      );
+      const { barChart, pieChart } = await chartRes.json();
+      const attachments = [];
+      if (barChart) {
+        attachments.push({
+          Name: "bar_chart.png",
+          Content: barChart,
+          ContentType: "image/png",
+          ContentID: "cid:barChart",
+        });
       }
 
-      if (symbol === "❌") {
-        const { error: updateError } = await supabase
-          .from("task")
-          .update({ frequency })
-          .eq("user_id", userId)
-          .eq("task", task);
+      attachments.push({
+        Name: "pie_chart.png",
+        Content: pieChart,
+        ContentType: "image/png",
+        ContentID: "cid:pieChart",
+      });
+      console.log(attachments);
+      console.log("Analysis sent");
+      await sendTemplateEmail(
+        fromEmail,
+        "mail-minders-analysis",
+        {
+          hasCompletedTasks: barChart != null,
+        },
+        attachments
+      );
+    } else {
+      // Parse task updates in body
+      const updates = [...body.matchAll(TASK_LINE_REGEX)];
 
-        if (updateError) {
-          console.error(`Error updating task '${task}':`, updateError);
+      for (const match of updates) {
+        const symbol = match[1];
+        const task = match[2].trim();
+        const frequency = match[3].trim();
+
+        if (symbol === "➕") {
+          await supabase.from("tasks").upsert(
+            {
+              user_id: userId,
+              task,
+              frequency,
+            },
+            { onConflict: "user_id,task" }
+          );
+          console.log(
+            `Received update: ${symbol} ${task} ${frequency} for ${fromEmail}`
+          );
+        }
+
+        if (symbol === "✅") {
+          const { error: deleteError } = await supabase
+            .from("tasks")
+            .delete()
+            .eq("user_id", userId)
+            .eq("task", task);
+
+          if (deleteError) {
+            console.error(`Error deleting task '${task}':`, deleteError);
+          }
+        }
+
+        if (symbol === "❌") {
+          const { error: updateError } = await supabase
+            .from("task")
+            .update({ frequency })
+            .eq("user_id", userId)
+            .eq("task", task);
+
+          if (updateError) {
+            console.error(`Error updating task '${task}':`, updateError);
+          }
         }
       }
     }
