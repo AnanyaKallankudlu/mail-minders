@@ -3,3 +3,5 @@ uvicorn
 matplotlib
 pydantic
 sentence_transformers
+postmarker
+psycopg2-binary

@@ -11,9 +11,9 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY")
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-user_id = "c28918d7-3568-48af-8504-56ca23673119"
+user_id = os.getenv("USER_ID")
 categories = ["payments", "work", "health", "personal", "family"]
-frequencies = ["daily", "weekly", "monthly"]
+frequencies = ["m", "h", "d"]
 
 # Load tasks from tasks.json
 with open("tasks.json", "r", encoding="utf-8") as f:
@@ -30,8 +30,8 @@ def random_datetime_within_last_week():
 def insert_random_tasks():
     for category in categories:
         available_tasks = all_tasks[category]
-        num_tasks = random.randint(1, 10)
-        chosen_tasks = random.sample(available_tasks, k=min(num_tasks, len(available_tasks)))
+        num = random.randint(1, 10)
+        chosen_tasks = random.sample(available_tasks, k=min(num, len(available_tasks)))
         remaining_tasks = [task for task in available_tasks if task not in chosen_tasks]
         insert_task_to_db(chosen_tasks, category, True)
         insert_task_to_db(remaining_tasks, category)
@@ -40,7 +40,9 @@ def insert_random_tasks():
 def insert_task_to_db(tasks, category, completed = False):
     try:
         for task_text in tasks:
-            frequency = random.choice(frequencies)
+            num = random.randint(1, 10)
+            frequency_str = random.choice(frequencies)
+            frequency = f"{num}{frequency_str}"
             created_at = random_datetime_within_last_week()
             last_reminded_at = created_at + timedelta(hours=random.randint(1, 48))
             completed_at = (last_reminded_at +
