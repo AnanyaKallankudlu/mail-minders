@@ -8,7 +8,7 @@ export const postmark = new Client(process.env.POSTMARK_SERVER_TOKEN!);
 export async function sendTemplateEmail(
   to: string,
   templateAliasOrId: string | number,
-  templateModel: Record<string, any>,
+  templateModel: Record<string, unknown>,
   attachments?: Models.Attachment[]
 ) {
   return await postmark.sendEmailWithTemplate({
