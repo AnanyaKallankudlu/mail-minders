@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer
 with open("tasks.json", "r", encoding="utf-8") as f:
     tasks = json.load(f)
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
+model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", use_auth_token=True, from_tf=True)
 
 centroids = {}
 
