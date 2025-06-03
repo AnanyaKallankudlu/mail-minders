@@ -101,7 +101,7 @@ export default async function handleTaskList(
         },
         attachments
       );
-    } else {
+    } else if (subject === "ADD") {
       // Parse task updates in body
       const updates = [...body.matchAll(TASK_LINE_REGEX)];
 
