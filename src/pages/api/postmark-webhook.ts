@@ -19,6 +19,8 @@ export default async function handleTaskList(
     const subject = payload.Subject?.trim().toUpperCase();
     const body = payload.TextBody?.trim() || "";
 
+    console.log(fromEmail, subject, body);
+
     // Ensure user exists
     const { data: user, error: userError } = await supabase
       .from("users")
@@ -32,7 +34,7 @@ export default async function handleTaskList(
     let userId: string;
     if (!user) {
       const { data: newUser, error: insertError } = await supabase
-        .from("user")
+        .from("users")
         .insert({ email: fromEmail })
         .select()
         .single();
@@ -40,7 +42,7 @@ export default async function handleTaskList(
       if (insertError) {
         console.error("Supabase error inserting user:", insertError);
       }
-
+      console.log("New user inserted:", newUser);
       userId = newUser.id;
     } else {
       userId = user.id;
@@ -103,6 +105,7 @@ export default async function handleTaskList(
       );
     } else if (subject === "ADD") {
       // Parse task updates in body
+      console.log("Going to add tasks");
       const updates = [...body.matchAll(TASK_LINE_REGEX)];
 
       for (const match of updates) {
@@ -111,17 +114,34 @@ export default async function handleTaskList(
         const frequency = match[3].trim();
 
         if (symbol === "➕") {
-          await supabase.from("tasks").upsert(
+          console.log(
+            `Received update: ${symbol} ${task} ${frequency} for ${fromEmail}`
+          );
+          const categoryResponse = await fetch(
+            `${process.env.ANALYSIS_SERVER}/classify`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ task }),
+            }
+          );
+          const categoryRes = await categoryResponse.json();
+          const category = categoryRes.category;
+          console.log(`Task ${task} classified as ${category}`);
+          const { error, data } = await supabase.from("tasks").upsert(
             {
               user_id: userId,
               task,
               frequency,
+              category,
             },
             { onConflict: "user_id,task" }
           );
-          console.log(
-            `Received update: ${symbol} ${task} ${frequency} for ${fromEmail}`
-          );
+          if (error) {
+            console.error("Supabase upsert error:", error);
+          } else {
+            console.log("Upserted task:", data);
+          }
         }
 
         if (symbol === "✅") {
