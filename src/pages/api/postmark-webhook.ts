@@ -103,7 +103,7 @@ export default async function handleTaskList(
         },
         attachments
       );
-    } else if (subject === "ADD") {
+    } else {
       // Parse task updates in body
       console.log("Going to add tasks");
       const updates = [...body.matchAll(TASK_LINE_REGEX)];
