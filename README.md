@@ -8,7 +8,7 @@
 
 - **Add Tasks:** Email new tasks and set their frequency using simple commands.
 - **List Tasks:** Request your current task list via email.
-- **Analyze Tasks:** Get visual charts of your completed tasks delivered to your inbox.
+- **Analyze Tasks:** Get visual charts of your completed tasks delivered to your inbox. Go inside the src/chart-api directory to find code that does the analysis.
 - **No Apps Needed:** Everything is managed through email—no need for extra apps or dashboards.
 
 ---
